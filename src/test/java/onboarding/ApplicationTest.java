@@ -1,5 +1,6 @@
 package onboarding;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,61 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ApplicationTest {
     @Nested
     class Problem1Test {
+
+        @Test
+        @DisplayName("리스트 or 배열의 길이가 2인지 검증: -1")
+        void testValidateLength(){
+            List<Integer> pobi = List.of(97, 98);
+            List<Integer> crong = List.of(1, 2, 3);
+            int result = -1;
+            assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
+        }
+
+        @Test
+        @DisplayName("리스트 or 배열의 요소가 연속된 자연수인지 검증: 성공")
+        void testValidateConsecutivePage1(){
+            List<Integer> pobi = List.of(97, 98);
+            List<Integer> crong = List.of(2, 3);
+            int result = Integer.MAX_VALUE;
+            assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
+
+        }
+
+        @Test
+        @DisplayName("리스트 or 배열의 요소가 연속된 자연수인지 검증: -1")
+        void testValidateConsecutivePage2(){
+            List<Integer> pobi = List.of(97, 98);
+            List<Integer> crong = List.of(2, 4);
+            int result = -1;
+            assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
+        }
+
+        @Test
+        @DisplayName("첫 번째 요소가 홀수 인지 검증: -1")
+        void testValidateConsecutivePage3(){
+            List<Integer> pobi = List.of(3, 4);
+            List<Integer> crong = List.of(46, 7);
+            int result = -1;
+            assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
+        }
+
+        @Test
+        @DisplayName("1을 포함하는지 검증: -1")
+        void testValidateContain1(){
+            List<Integer> pobi = List.of(1, 2);
+            List<Integer> crong = List.of(46, 47);
+            int result = -1;
+            assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
+        }
+        @Test
+        @DisplayName("400을 포함하는지 검증: -1")
+        void testValidateContain400(){
+            List<Integer> pobi = List.of(3,4);
+            List<Integer> crong = List.of(399, 400);
+            int result = -1;
+            assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
+        }
+
         @Test
         void case1() {
             List<Integer> pobi = List.of(97, 98);
