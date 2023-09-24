@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest {
     @Nested
@@ -94,8 +95,29 @@ class ApplicationTest {
 
     @Nested
     class Problem2Test {
+
+        //assertThatThrownBy : Exception이 발생하는 케이스를 테스트할 때 사용합니다.
+
+        @Test
+        @DisplayName("문자열의 길이가 1이상 1000이하 인지 검증")
+        void validateStringLength() {
+            String cryptogram = "";
+            assertThatThrownBy(() -> Problem2.validateLength(cryptogram))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("허용되지 않은 길이의 문자열입니다.");
+        }
+
+        @Test
+        @DisplayName("문자열에 소문자가 포함되어 있는지 검증")
+        void validateIsLower() {
+            String cryptogram = "Aa";
+            assertThatThrownBy(() -> Problem2.validateIsLower(cryptogram))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("소문자가 아닌 다른 값이 포함되어 있습니다.");
+        }
         @Test
         void case1() {
+
             String cryptogram = "browoanoommnaon";
             String result = "brown";
             assertThat(Problem2.solution(cryptogram)).isEqualTo(result);
