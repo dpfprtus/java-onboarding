@@ -3,6 +3,8 @@ package onboarding;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -133,6 +135,16 @@ class ApplicationTest {
 
     @Nested
     class Problem3Test {
+
+        @ParameterizedTest
+        @ValueSource(ints = {-1, 0, 10001})
+        @DisplayName("number가 1이상 10,000이하 자연수 인지 검증")
+        void testValidateRange(int number) {
+            assertThatThrownBy(() -> Problem3.validateRange(number))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("유효하지 않은 범위 내의 숫자입니다.");
+        }
+
         @Test
         void case1() {
             int number = 13;
