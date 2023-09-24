@@ -1,4 +1,4 @@
-# Problem23
+# Problem3
 
 ## ✅ 구현 기능 목록
 - [x] number가 올바른지 검증
