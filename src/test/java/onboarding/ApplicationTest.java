@@ -13,7 +13,7 @@ class ApplicationTest {
     class Problem1Test {
 
         @Test
-        @DisplayName("리스트 or 배열의 길이가 2인지 검증: -1")
+        @DisplayName("리스트 or 배열의 길이가 2인지 검증")
         void testValidateListSize(){
             List<Integer> pobi = List.of(97, 98);
             List<Integer> crong = List.of(1, 2);
@@ -26,7 +26,7 @@ class ApplicationTest {
         @DisplayName("리스트 or 배열의 요소가 연속된 자연수인지 검증: 성공")
         void testValidateConsecutivePage1(){
             List<Integer> pobi = List.of(97, 98);
-            List<Integer> crong = List.of(2, 3);
+            List<Integer> crong = List.of(197,198);
             int result = 0;
             assertThat(Problem1.solution(pobi, crong)).isEqualTo(result);
 

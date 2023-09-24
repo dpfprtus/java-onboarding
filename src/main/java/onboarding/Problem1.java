@@ -14,14 +14,25 @@ class Problem1 {
     private static Pages crongPages;
 
     public static int solution(List<Integer> pobi, List<Integer> crong) {
-        int answer = Integer.MAX_VALUE;
+
         try {
             pobiPages = Pages.of(pobi);
             crongPages = Pages.of(crong);
         } catch (IllegalArgumentException e) {
             return EXCEPTIONS_OCCURED;
         }
-        return answer;
+        pobiScore = Pages.makeFinalScore(pobiPages);
+        crongScore = Pages.makeFinalScore(crongPages);
+        return calculateWinner(pobiScore, crongScore);
+    }
+    private static int calculateWinner(int pobiScore, int crongScore) {
+        if (pobiScore > crongScore) {
+            return POBI_WIN;
+        }
+        if (pobiScore < crongScore) {
+            return CRONG_WIN;
+        }
+        return DRAW;
     }
     static class Pages {
         private static final int SIZE_OF_PAGE = 2;
@@ -59,18 +70,20 @@ class Problem1 {
             return new Pages(pages);
         }
 
-        public static int makeFinalScore(Pages pages) {
+
+
+        private static int makeFinalScore(Pages pages) {
             return Math.max(makeScoreByAddition(pages.pages), makeScoreByMultiplication(pages.pages));
         }
 
-        public static int makeScoreByAddition(List<Integer> pages) {
+        private static int makeScoreByAddition(List<Integer> pages) {
             return Math.max(calculateScoreByAddition(pages.get(0)), calculateScoreByAddition(pages.get(1)));
         }
-        public static int makeScoreByMultiplication(List<Integer> pages) {
+        private static int makeScoreByMultiplication(List<Integer> pages) {
             return Math.max(calculateScoreByMultiplication(pages.get(0)), calculateScoreByMultiplication(pages.get(1)));
         }
 
-        public static int calculateScoreByAddition(int page) {
+        private static int calculateScoreByAddition(int page) {
 
             int total = 0;
             while (page != 0) {
@@ -80,10 +93,10 @@ class Problem1 {
             return total;
         }
 
-        public static int calculateScoreByMultiplication(int page) {
+        private static int calculateScoreByMultiplication(int page) {
             int total = 1;
             while (page != 0) {
-                total *= (page * 10);
+                total *= (page % 10);
                 page /= 10;
             }
             return total;
