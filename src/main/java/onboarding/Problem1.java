@@ -60,7 +60,7 @@ class Problem1 {
         }
 
         public static int makeFinalScore(Pages pages) {
-            return Math.max(makeScoreByAddition(pages.pages), makeScoreByMultiplication(pages.pages);
+            return Math.max(makeScoreByAddition(pages.pages), makeScoreByMultiplication(pages.pages));
         }
 
         public static int makeScoreByAddition(List<Integer> pages) {
