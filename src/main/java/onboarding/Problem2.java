@@ -9,9 +9,19 @@ public class Problem2 {
 
     public static String solution(String cryptogram) {
         String answer = "answer";
+        try {
+            validate(cryptogram);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return "";
+        }
         return answer;
     }
 
+    public static void validate(String cryptogram) {
+        validateLength(cryptogram);
+        validateIsLower(cryptogram);
+    }
     public static void validateLength(String cryptogram) {
         if (cryptogram.length() < MIN_LENGTH || cryptogram.length() > MAX_LENGTH) {
             throw new IllegalArgumentException("허용되지 않은 길이의 문자열입니다.");
