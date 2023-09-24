@@ -162,6 +162,10 @@ class ApplicationTest {
 
     @Nested
     class Problem4Test {
+
+        @ParameterizedTest
+        @ValueSource()
+
         @Test
         void case1() {
             String word = "I love you";
