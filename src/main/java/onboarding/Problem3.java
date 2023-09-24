@@ -4,15 +4,37 @@ public class Problem3 {
     private static final int MAX_NUMBER = 10000;
     private static final int MIN_NUMBER = 1;
 
-
     public static int solution(int number) {
-        int answer = 0;
         try {
             validateRange(number);
         } catch (IllegalArgumentException e) {
             return 0;
         }
-        return answer;
+        return HowMuchHave369(number);
+    }
+
+    public static int HowMuchHave369(int number) {
+        int count = 0;
+        for (int i = 1; i <= number; i++) {
+            count += divideOndNumber(i);
+        }
+        return count;
+    }
+
+    public static int divideOndNumber(int number) {
+        int num = 0;
+        while (number != 0) {
+            num += showHave369(number % 10);
+            number /= 10;
+        }
+        return num;
+    }
+
+    public static int showHave369(int number) {
+        if (number == 3 || number == 6 || number == 9) {
+            return 1;
+        }
+        return 0;
     }
 
     public static void validateRange(int number) {
