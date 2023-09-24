@@ -18,11 +18,24 @@ public class Problem2 {
             e.printStackTrace();
             return answer;
         }
+        deleteContinuousLetters(cryptogram);
+        answer = convertStackToString();
 
         return answer;
     }
 
+    public static String convertStackToString() {
+        //메모리 부하를 많이 일으키는 String 클래스와 달리 변경에 있어서 용이한 StringBuilder() 클래스 사용
+        //String으로 변경을 위해 sb.toString() 사용
+        StringBuilder sb = new StringBuilder();
+        for (char letter : charStack) {
+            sb.append(letter);
+        }
+        return sb.toString();
+    }
+
     public static void deleteContinuousLetters(String cryptogram) {
+        charStack = new Stack<>();
         char[] letters = convertToArray(cryptogram);
         for (char letter : letters) {
             deleteContinuousLetter(letter);
