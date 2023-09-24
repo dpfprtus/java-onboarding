@@ -1,11 +1,14 @@
 package onboarding;
 
+import java.util.Stack;
+
 public class Problem2 {
     private static final int MAX_LENGTH = 1000;
     private static final int MIN_LENGTH = 1;
     private static final char FIRST_LETTER = 'a';
     private static final char LAST_LETTER = 'z';
 
+    private static Stack<Character> charStack;
 
     public static String solution(String cryptogram) {
         String answer = "answer";
@@ -13,9 +16,33 @@ public class Problem2 {
             validate(cryptogram);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            return "";
+            return answer;
         }
+
         return answer;
+    }
+
+    public static void deleteContinuousLetters(String cryptogram) {
+        char[] letters = convertToArray(cryptogram);
+        for (char letter : letters) {
+            deleteContinuousLetter(letter);
+        }
+    }
+
+    public static void deleteContinuousLetter(char letter) {
+        if (checkContinuousInStack(letter)) {
+            charStack.pop();
+            return;
+        }
+        charStack.push(letter);
+    }
+
+    public static boolean checkContinuousInStack(char letter) {
+        return (!charStack.isEmpty() && charStack.peek() == letter);
+    }
+
+    public static char[] convertToArray(String cryptogram) {
+        return cryptogram.toCharArray();
     }
 
     public static void validate(String cryptogram) {
