@@ -162,9 +162,13 @@ class ApplicationTest {
 
     @Nested
     class Problem4Test {
-
-        @ParameterizedTest
-        @ValueSource()
+        @Test
+        @DisplayName("문자열 길이 검증")
+        void validateRange() {
+            assertThatThrownBy(() -> Problem4.validateRange(""))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("허용되지 않은 길이의 문자열입니다.");
+        }
 
         @Test
         void case1() {
