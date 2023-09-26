@@ -31,10 +31,14 @@ public class Problem3 {
     }
 
     public static int showHave369(int number) {
-        if (number == 3 || number == 6 || number == 9) {
+        if (isMultipleThree(number)) {
             return 1;
         }
         return 0;
+    }
+
+    public static boolean isMultipleThree(int number) {
+        return (number % 3 == 0);
     }
 
     public static void validateRange(int number) {
