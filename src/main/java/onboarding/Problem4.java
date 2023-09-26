@@ -23,6 +23,17 @@ public class Problem4 {
         return answer;
     }
 
+
+
+    private static boolean isUpperCase(char letter) {
+        return (letter > 'A' && letter < 'Z');
+    }
+
+    private static boolean isLowerCase(char letter) {
+        return (letter > 'a' && letter < 'z');
+    }
+
+
     public static void validateRange(String word) {
         if (word.isEmpty() || word.length() > MAX_STRING) {
             throw new IllegalArgumentException("허용되지 않은 길이의 문자열입니다.");
