@@ -36,7 +36,7 @@ public class Problem2 {
 
     public static void deleteContinuousLetters(String cryptogram) {
         charStack = new Stack<>();
-        char[] letters = convertToArray(cryptogram);
+        char[] letters = cryptogram.toCharArray();
         for (char letter : letters) {
             deleteContinuousLetter(letter);
         }
@@ -52,10 +52,6 @@ public class Problem2 {
 
     public static boolean checkContinuousInStack(char letter) {
         return (!charStack.isEmpty() && charStack.peek() == letter);
-    }
-
-    public static char[] convertToArray(String cryptogram) {
-        return cryptogram.toCharArray();
     }
 
     public static void validate(String cryptogram) {
