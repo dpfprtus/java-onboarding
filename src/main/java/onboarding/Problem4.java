@@ -12,7 +12,7 @@ public class Problem4 {
     private static final int ASCII_CODE_OF_LAST_LOWWERCASE_ALPHABET = 122;
 
     public static String solution(String word) {
-        String answer = "";
+
         try {
             validateRange(word);
         } catch (IllegalArgumentException e) {
@@ -20,10 +20,35 @@ public class Problem4 {
         }
         initLetter();
 
-        return answer;
+        return makeReverseWord(word);
     }
 
+    private static String makeReverseWord(String word) {
+        String reverseWord = "";
+        char[] letters = word.toCharArray();
+        for (char letter : letters) {
+            reverseWord += makeReverseLetter(letter);
+        }
+        return reverseWord;
+    }
 
+    private static char makeReverseLetter(char letter) {
+        if (isLowerCase(letter)) {
+            return convertToUpperCase(letter);
+        }
+        if (isUpperCase(letter)) {
+            return convertToLowwerCase(letter);
+        }
+        return letter;
+    }
+
+    private static char convertToUpperCase(char letter) {
+        return LOWWERCASE_LETTER.get(letter - 'a');
+    }
+
+    private static char convertToLowwerCase(char letter) {
+        return UPPERCASE_LETTER.get(letter - 'A');
+    }
 
     private static boolean isUpperCase(char letter) {
         return (letter > 'A' && letter < 'Z');
