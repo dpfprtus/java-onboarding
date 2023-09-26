@@ -208,6 +208,20 @@ class ApplicationTest {
 
     @Nested
     class Problem6Test {
+
+        @Test
+        void testValidateForm() {
+            List<List<String>> test = List.of(
+                    List.of("andrew#emaill.com","앤드류"),
+                    List.of("blank@email.com",""),
+                    List.of("jason@meail.comm","제이슨"),
+                    List.of("testtesttesttesttesttesttse@email.com","테스트"),
+                    List.of("test@email.com","20자이상인닉네임20자이상인닉네임20자이상인닉네임")
+                    );
+            assertThatThrownBy(() -> Problem6.validate(test))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
+
         @Test
         void case1() {
             List<List<String>> forms = List.of(
