@@ -1,18 +1,63 @@
 package onboarding;
 
 import java.nio.channels.IllegalChannelGroupException;
-import java.util.List;
+import java.util.*;
 
 public class Problem6 {
     private static final int MAX_LENGTH = 20;
+    private static Map<String, String> twoLettersForm = new HashMap<>();
+    private static Set<String> duplicatedUserEmails = new TreeSet<>();
+
     public static List<String> solution(List<List<String>> forms) {
-        List<String> answer = List.of("answer");
+
         try {
             validate(forms);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-        return answer;
+        updateDuplicatedUserEmails(forms);
+        return new ArrayList<>(duplicatedUserEmails);
+    }
+
+    public static void updateDuplicatedUserEmails(List<List<String>> forms) {
+
+        for (List<String> form : forms) {
+            saveTwoLetterNameForm(form);
+        }
+    }
+
+    private static void saveTwoLetterNameForm(List<String> form) {
+        String email = form.get(0);
+        String nickname = form.get(1);
+        List<String> twoLetterName = parseTwoLetterNames(nickname);
+        for (String name : twoLetterName) {
+            saveTwoLetterNameForms(email,name);
+        }
+    }
+
+    public static List<String> parseTwoLetterNames(String nickname) {
+        List<String> twoLetterNames = new ArrayList<>();
+        for (int i = 0; i < nickname.length() - 1; i++) {
+            twoLetterNames.add(nickname.substring(i, i + 2));
+        }
+        return twoLetterNames;
+    }
+
+    public static void saveTwoLetterNameForms(String email,String twoLetterName) {
+        if (checkDuplicateName(twoLetterName)){
+            addDuplicatedUserEmails(email, twoLetterName);
+        }
+        twoLettersForm.put(twoLetterName, email);
+    }
+
+    public static void addDuplicatedUserEmails(String email, String twoLetterName) {
+        duplicatedUserEmails.add(email);
+        duplicatedUserEmails.add(twoLettersForm.get(twoLetterName));
+    }
+
+
+    private static boolean checkDuplicateName(String twoLetterName) {
+        return (twoLettersForm.containsKey(twoLetterName));
     }
 
     public static void validate(List<List<String>> form) {
