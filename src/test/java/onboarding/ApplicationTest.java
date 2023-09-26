@@ -180,8 +180,19 @@ class ApplicationTest {
 
     @Nested
     class Problem5Test {
+
+        @ParameterizedTest
+        @ValueSource(ints = {-1,0,1000001})
+        @DisplayName("1이상 1,000,000이하 자연수인지 검증")
+        void validateInputSize(int number) {
+            assertThatThrownBy(() -> Problem5.validateInputSize(number))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("유효하지 않은 범위의 숫자입니다.");
+        }
+
         @Test
         void case1() {
+
             int money = 50_237;
             List<Integer> result = List.of(1, 0, 0, 0, 0, 2, 0, 3, 7);
             assertThat(Problem5.solution(money)).isEqualTo(result);
