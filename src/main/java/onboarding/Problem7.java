@@ -10,8 +10,25 @@ public class Problem7 {
         List<String> answer = Collections.emptyList();
         makeFriendList(friends);
         makeAllRecommendScore(user);
+        addVisitorsScore(visitors);
         return answer;
     }
+
+    private static void addVisitorsScore(List<String> visitors) {
+        for (String visitor : visitors) {
+            findVisitorsCount(visitor);
+        }
+    }
+
+    private static void findVisitorsCount(String visitor) {
+        if (recommendScore.containsKey(visitor)) {
+            recommendScore.put(visitor, recommendScore.get(visitor) + 1);
+            return;
+        }
+        recommendScore.put(visitor, 1);
+    }
+
+
 
     private static void makeAllRecommendScore(String user) {
         for (String targetUser : friendList.keySet()) {
