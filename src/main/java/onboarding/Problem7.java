@@ -11,7 +11,12 @@ public class Problem7 {
         makeFriendList(friends);
         makeAllRecommendScore(user);
         addVisitorsScore(visitors);
+        removeFriendWithUser(user);
         return answer;
+    }
+
+    private static void removeFriendWithUser(String user) {
+        recommendScore.keySet().removeIf(key -> key.equals(user) || friendList.get(user).contains(key));
     }
 
     private static void addVisitorsScore(List<String> visitors) {
