@@ -9,9 +9,27 @@ public class Problem7 {
     public static List<String> solution(String user, List<List<String>> friends, List<String> visitors) {
         List<String> answer = Collections.emptyList();
         makeFriendList(friends);
+        makeAllRecommendScore(user);
         return answer;
     }
 
+    private static void makeAllRecommendScore(String user) {
+        for (String targetUser : friendList.keySet()) {
+            initRecommendScore(user,targetUser);
+        }
+    }
+
+    private static void initRecommendScore(String user, String targetUser) {
+        Set<String> userFriends = friendList.get(user);
+        Set<String> targetUserFriends = friendList.get(targetUser);
+        recommendScore.put(targetUser, countFriendUserKnowTogether(userFriends, targetUserFriends) * 10);
+    }
+
+    private static int countFriendUserKnowTogether(Set<String> userFriends, Set<String> targetUserFriends) {
+        return (int)(targetUserFriends.stream()
+                .filter(userFriends::contains)
+                .count());
+    }
 
 
 
