@@ -1,18 +1,32 @@
 package onboarding;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Problem7 {
     private static final int MAX_NUMBER_OF_PEOPLE_CAN_RECOMMEND = 5;
     private static Map<String, Set<String>> friendList = new HashMap<>();
     private static Map<String, Integer> recommendScore = new HashMap<>();
     public static List<String> solution(String user, List<List<String>> friends, List<String> visitors) {
-        List<String> answer = Collections.emptyList();
+
         makeFriendList(friends);
         makeAllRecommendScore(user);
         addVisitorsScore(visitors);
         removeFriendWithUser(user);
-        return answer;
+        return recommendFriends();
+    }
+
+    private static List<String> recommendFriends() {
+        return recommendScore.entrySet().stream()
+                .filter(user -> isNotZeroScore(user.getValue()))
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(5)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    private static boolean isNotZeroScore(Integer score) {
+        return (score != 0);
     }
 
     private static void removeFriendWithUser(String user) {
